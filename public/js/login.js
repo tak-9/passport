@@ -28,12 +28,18 @@ $(document).ready(function() {
       email: email,
       password: password
     })
-      .then(function() {
-        window.location.replace("/members");
-        // If there's an error, log the error
+      .then(function(data) {
+        console.log("data",  data);
+        if (data.usertype === "staff"){
+          window.location.replace("/staff");
+        } else if (data.usertype === "student") {
+          window.location.replace("/student");
+        }
       })
       .catch(function(err) {
+        // If there's an error, log the error
         console.log(err);
+        alert("login id or password is wrong!");
       });
   }
 });
